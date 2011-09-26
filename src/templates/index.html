@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>New UI Mock-up (Draft)</title>
+        <!-- Our CSS stylesheet file -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link type='text/css' href='assets/css/osx.css' rel='stylesheet' media='screen' />
+        <!--[if lt IE 9]>
+        <script
+        src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+<!--         <header>
+            <h1>HTML5 File Upload</h1>
+        </header> -->
+        <div id="dropbox">
+            <span class="message">Drop images here to upload.
+                <br />
+                <i>(they will only be visible to you)</i></span>
+            {% if files %}
+              {% for file in files %}
+              <div class='preview done'>
+                <span class='imageHolder'>
+                  <img src='/z{{ file._id }}.png'>
+                  <span class='uploaded'></span>
+                   <a class='download osx' href='/i{{ file._id }}.png' target="_blank"></a> 
+                      <!-- modal content -->
+                     <div id="osx-modal-content">
+<!--                       <div id="osx-modal-title">{{ file.name }}</div> -->
+                      <div class="close"><a href="#" class="simplemodal-close">x</a></div>
+                      <div id="osx-modal-data">
+                        <img src='/z{{ file._id }}.png'>
+                        <div id="osx-modal-title">{{ file.name }}</div>
+                      </div>
+                    </div> 
+                </span>
+                <div class='progressHolder'>
+                  <input readonly onclick="this.focus();this.select()" value='http://share.soha.vn/i{{ file._id }}.png?width=800'>
+                  
+                </div>
+              </div>
+              {% endfor %}
+            {% endif %}
+        </div>
+         <footer>
+<!--             <h2>share.soha.vn © 2011</h2> -->
+            <a class='twitter_follow' href="#">Follow us on Twitter</a>
+        </footer>
+        <!-- Including The jQuery Library -->
+        <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+        <!-- Including the HTML5 Uploader plugin -->
+        <script src="assets/js/jquery.filedrop.js"></script>
+        
+        <script src='http://simplemodal.googlecode.com/files/jquery.simplemodal.1.4.1.min.js'></script>
+        <script src='assets/js/osx.js'></script>
+        <!-- The main script file -->
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>
