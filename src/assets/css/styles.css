@@ -153,7 +153,7 @@ h1{
 	position:relative;
 }
 
-#dropbox .download {
+#dropbox .popup {
   position: absolute;
   top:0;
   left:0;
@@ -162,13 +162,17 @@ h1{
   opacity: 0;
 }
 
-#dropbox .download:hover {
+#dropbox .popup:hover {
   background: url('../img/download.png') no-repeat center center rgba(255,255,255,0.5);
   opacity: 0.9;  
 }
 
-#dropbox .download:active {
+#dropbox .popup:active {
   opacity: 1;
+}
+
+#fancybox-wrap {
+  top: 50px !important;
 }
 
 #dropbox .uploaded{

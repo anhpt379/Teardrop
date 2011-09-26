@@ -100,5 +100,13 @@ $(function(){
 		message.html(msg);
 	}
 
+  $("a[rel=popup]").fancybox({
+        'titleShow'     : true,
+        'titlePosition' : 'inside',
+        'transitionIn'  : 'elastic',
+        'transitionOut' : 'elastic',
+        'easingIn'      : 'easeOutBack',
+        'easingOut'     : 'easeInBack'
+    });
 
 });

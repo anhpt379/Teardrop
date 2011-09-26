@@ -117,7 +117,7 @@ def file(fid):
 
 @app.route("/p<fid>.png")
 def preview(fid):
-  key = 'z' + fid
+  key = 'p' + fid
   key = str(key)
   filedata = CACHE.get(key)
   if not filedata:
