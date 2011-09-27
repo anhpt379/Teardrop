@@ -45,6 +45,27 @@ def _get_next_id():
                                 upsert=True))
   return result['value'].get('auto_increment', 0)
 
+
+from threading import Thread
+from functools import wraps
+
+def async(func):
+  @wraps(func)
+  def async_func(*args, **kwargs):
+    func_hl = Thread(target = func, args = args, kwargs = kwargs)
+    func_hl.start()
+    return func_hl
+  return async_func
+
+@async
+def make_thumb(fid, filedata):
+  key = 'z' + fid
+  key = str(key)
+  filedata = zoom(filedata, 200, 200)
+  CACHE.set(key, filedata)
+  return True
+  
+
 def new_id():
   id = _get_next_id()
   return _id_encode(id)
@@ -66,7 +87,8 @@ def get_file_data(fid):
   
 def save_file(uid, file):
   """ @file: FileStorage object """
-  filedata = file.stream.read()
+  filedata = file.stream.read()  
+  
   md5sum = md5(filedata).hexdigest()
   info = DATABASE.file.find_one({'md5': md5sum, 'uid': uid})
   if not info:
@@ -79,7 +101,11 @@ def save_file(uid, file):
     fp = DATASTORE.new_file(info['md5'])
     fp.write(filedata)
     fp.close()
-  return info['_id']
+    
+  fid = info['_id']
+  make_thumb(fid, filedata)
+  
+  return fid
   
   
 @app.route("/assets/<path:filename>")
@@ -150,4 +176,10 @@ def thumbnail(fid):
 
 
 if __name__ == '__main__':
-  app.run(debug=True, host='0.0.0.0')
+#  app.run(debug=True, host='0.0.0.0')
+  from cherrypy import wsgiserver    
+  server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 5000), app)
+  try:
+    server.start()
+  except KeyboardInterrupt:
+    server.stop()

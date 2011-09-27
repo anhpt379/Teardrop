@@ -57,7 +57,7 @@ $(function(){
 	var template = '<div class="preview">'+
 						'<span class="imageHolder">'+
 							'<img />'+
-							'<span class="uploaded"></span>'+
+							'<span class="popup"></span>'+
 						'</span>'+
 						'<div class="progressHolder">'+
 							'<div class="progress"></div>'+
@@ -99,14 +99,21 @@ $(function(){
 	function showMessage(msg){
 		message.html(msg);
 	}
+	
+	function formatTitle(title, currentArray, currentIndex, currentOpts) {
+	  id = title;
+    return $('div#' + id).html();
+  }
 
   $("a[rel=popup]").fancybox({
         'titleShow'     : true,
         'titlePosition' : 'inside',
+        'titleFormat'   : formatTitle,
         'transitionIn'  : 'elastic',
         'transitionOut' : 'elastic',
         'easingIn'      : 'easeOutBack',
-        'easingOut'     : 'easeInBack'
+        'easingOut'     : 'easeInBack',
+        'overlayColor'  : '#000',
     });
 
 });

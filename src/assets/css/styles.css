@@ -49,13 +49,8 @@ header, footer{
 
 
 
-header{
-	background:url('../img/background_tile_1.jpg');
-	padding:75px;
-	position: relative;
-}
 
-header:before,
+header,
 #dropbox:before{
 	display: block;
 	content:'';
@@ -82,7 +77,9 @@ h1{
 /*-------------------------
 	Dropbox Element
 --------------------------*/
-
+html, body {
+  height: 100%;
+}
 
 
 #dropbox{
@@ -91,11 +88,8 @@ h1{
 	border-radius:3px;
 	
 	overflow: hidden;
-	padding-bottom: 40px;
-	position: fixed;
 	width: 100%;
-	height: 100%;
-	
+	min-height: 100%;
   left: 0;
   top: 0;
 	
@@ -118,8 +112,12 @@ h1{
 	font-size:10px;
 }
 
-#dropbox:before{
+header {
 	border-radius:3px 3px 0 0;
+	position: fixed;
+	top: 0;
+	box-shadow: 0 0 10px black;
+	z-index: 9999;
 }
 
 
@@ -153,14 +151,18 @@ h1{
 	position:relative;
 }
 
-#dropbox .popup {
+.hidden {
+  display: none;
+}
+
+/*#dropbox .popup {
   position: absolute;
   top:0;
   left:0;
   height:100%;
   width:100%;
   opacity: 0;
-}
+}*/
 
 #dropbox .popup:hover {
   background: url('../img/download.png') no-repeat center center rgba(255,255,255,0.5);
@@ -175,14 +177,26 @@ h1{
   top: 50px !important;
 }
 
-#dropbox .uploaded{
+#fancybox-title {
+  line-height: 20px;
+}
+
+#fancybox-title input {
+  width: 100%;
+  text-align: center;
+  background: #F1F1F1;
+  padding: 5px 0;
+  border: 1px solid #E2E2E2;
+  margin-top: 10px;
+}
+
+#dropbox .popup{
 	position: absolute;
 	top:0;
 	left:0;
 	height:100%;
 	width:100%;
 	background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
-	display: none;
 }
 
 #dropbox .preview.done .uploaded{
@@ -255,7 +269,7 @@ footer{
 	height:70px;
 	bottom:0;
 	left:0;
-	z-index: 100000;
+	z-index: 1000;
 	
 	box-shadow: 0 -1px 2px #171717;
 	-webkit-box-shadow: 0 -1px 2px #171717;
@@ -297,4 +311,35 @@ footer h2{
 .twitter_follow:active {
     background-position: 100% 100%;
     color: #63B0D8;
+}
+
+.arrow {
+  border-color: transparent transparent #f1f1f1 transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:relative;
+  margin-left: -25px;
+}
+
+.arrow-border {
+  border-color: transparent transparent #e2e2e2 transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:relative;
+  margin-left: -25px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+a {
+  color: #333;
+  font-size: 12px;
+  font-family: "Lucida Grande", "Helvetica Neue",Helvetica,Verdana,Arial,sans-serif;
+  text-decoration: none;
 }

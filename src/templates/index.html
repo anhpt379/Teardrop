@@ -12,9 +12,7 @@
         <![endif]-->
     </head>
     <body>
-<!--         <header>
-            <h1>HTML5 File Upload</h1>
-        </header> -->
+        <header></header>
         <div id="dropbox">
             <span class="message">Drop images here to upload.
                 <br />
@@ -24,8 +22,17 @@
               <div class='preview done'>
                 <span class='imageHolder'>
                   <img src='/z{{ file._id }}.png'>
-                  <span class='uploaded'></span>
-                   <a class='popup' rel='popup' href='/p{{ file._id }}.png' target="_blank" title='{{ file.name }}'></a> 
+<!--                   <span class='uploaded'></span> -->
+                   <a class='popup' rel='popup' href='/p{{ file._id }}.png' target="_blank" title='{{ file._id }}'></a>
+                   <div id='{{ file._id }}' class='hidden'>
+                     {{ file.name }}<br>
+                     <span>Size (width): </span>
+                     <a href="#">640px</a> | 
+                     <a href="#" class='active'>800px</a> | 
+                     <a href="#">1024px</a> | 
+                     <a href="#">Original</a><br>
+                     <input readonly onclick="this.focus();this.select()" value="http://share.soha.vn/i{{ file._id }}.png?width=800"> 
+                   </div>
                 </span>
                 <div class='progressHolder'>
                   <input readonly onclick="this.focus();this.select()" value='http://share.soha.vn/i{{ file._id }}.png?width=800'>
@@ -36,11 +43,11 @@
             {% endif %}
         </div>
          <footer>
-<!--             <h2>share.soha.vn © 2011</h2> -->
+<!--             <h2>share.soha.vn © 2011</h2> -->            
             <a class='twitter_follow' href="#">Follow us on Twitter</a>
         </footer>
         <!-- Including The jQuery Library -->
-        <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+        <script src="assets/js/jquery-1.6.3.min.js"></script>
         <!-- Including the HTML5 Uploader plugin -->
         <script src="assets/js/jquery.filedrop.js"></script>
         
