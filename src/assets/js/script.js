@@ -7,8 +7,8 @@ $(function(){
 		// The name of the $_FILES entry:
 		paramname:'pic',
 		
-		maxfiles: 5,
-    	maxfilesize: 2,
+		maxfiles: 15,
+    	maxfilesize: 10,
 		url: 'upload',
 		
 		uploadFinished:function(i,file,response){
@@ -114,6 +114,7 @@ $(function(){
         'easingIn'      : 'easeOutBack',
         'easingOut'     : 'easeInBack',
         'overlayColor'  : '#000',
+        'centerOnScroll': true,
     });
 
 

@@ -14,9 +14,6 @@
     <body>
         <header></header>
         <div id="dropbox">
-            <span class="message">Drop images here to upload.
-                <br />
-                <i>(they will only be visible to you)</i></span>
             {% if files %}
               {% for file in files %}
               <div class='preview done'>
@@ -40,10 +37,26 @@
                 </div>
               </div>
               {% endfor %}
+            {% else %}
+            
+            <span class="message">Drop images here to upload.
+                <br />
+                <i>(they will only be visible to you)</i></span>
             {% endif %}
+            
         </div>
          <footer>
-<!--             <h2>share.soha.vn © 2011</h2> -->            
+<!--             <h2>share.soha.vn © 2011</h2> -->   
+            <div class='left'> 
+              <h2>Teardrop</h2>      
+              <div class='links'>
+                <a href="/" class='float'>About us</a> ·
+                <a href="/" class='float'>Terms of Service</a> ·
+                <a href="/" class='float'>Privacy Policy</a> ·
+                <a href="/" class='float'>Jobs</a>
+              </div>
+            </div>   
+                
             <a class='twitter_follow' href="#">Follow us on Twitter</a>
         </footer>
         <!-- Including The jQuery Library -->
