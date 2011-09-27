@@ -22,17 +22,26 @@
 <!--                   <span class='uploaded'></span> -->
                    <a class='popup' rel='popup' href='/p{{ file._id }}.png' target="_blank" title='{{ file._id }}'></a>
                    <div id='{{ file._id }}' class='hidden'>
+                     <label>Name:</label>
                      {{ file.name }}<br>
-                     <span>Size (width): </span>
+                     
+                     <label>Actions: </label>
+                     <a href='#'>Rotate</a> ·
+                     <a href='#'>Popout</a> ·
+                     <a href='#'>Delete</a> ·
+                     <a href='#'>Download original</a><br>
+                     <!-- <span>Size (width): </span>
                      <a href="#">640px</a> | 
                      <a href="#" class='active'>800px</a> | 
                      <a href="#">1024px</a> | 
-                     <a href="#">Original</a><br>
-                     <input readonly onclick="this.focus();this.select()" value="http://share.soha.vn/i{{ file._id }}.png?width=800"> 
+                     <a href="#">Original</a><br> -->
+                     
+                     <label>Public URL:</label>
+                     <input readonly onmouseover="this.focus();this.select()" value="http://share.soha.vn/i{{ file._id }}.png?width=800"> 
                    </div>
                 </span>
                 <div class='progressHolder'>
-                  <input readonly onclick="this.focus();this.select()" value='http://share.soha.vn/i{{ file._id }}.png?width=800'>
+                  <input readonly onmouseover="this.focus();this.select()" value='http://share.soha.vn/i{{ file._id }}.png?width=800'>
                   
                 </div>
               </div>

@@ -173,7 +173,7 @@ header {
 }
 
 #fancybox-wrap {
-  margin-top: -100px !important;
+  margin-top: -10% !important;
 }
 
 #fancybox-title {
@@ -182,7 +182,13 @@ header {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
   padding: 10px 0;
   color: white;
-  text-align: center;
+}
+
+#fancybox-title label {
+  font-weight: bold;
+  width: 150px;
+  text-align: right;
+  display: inline-block;
 }
 
 /*#fancybox-title::before {
@@ -197,12 +203,9 @@ header {
 }*/
 
 #fancybox-title input {
-  width: 100%;
-  text-align: center;
-  padding: 5px 0;
+  min-width: 300px;
   border: 0;
   background: transparent;
-  margin-top: 10px;
   color: white;
 }
 
