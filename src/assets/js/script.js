@@ -116,4 +116,9 @@ $(function(){
         'overlayColor'  : '#000',
     });
 
+
+  $(document).ready(function() {
+    $("html, body").animate({ scrollTop: $(document).height() }, 'slow');
+  });
+  
 });

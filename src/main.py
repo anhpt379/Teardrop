@@ -74,7 +74,7 @@ def get_files(uid):
   if not uid:
     return []
   else:
-    files = DATABASE.file.find({'uid': uid}).sort('ts', -1)
+    files = DATABASE.file.find({'uid': uid}).sort('ts', 1)
     return list(files)
   
 def get_file_data(fid):
