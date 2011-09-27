@@ -155,17 +155,16 @@ header {
   display: none;
 }
 
-/*#dropbox .popup {
+#dropbox .popup {
   position: absolute;
   top:0;
   left:0;
   height:100%;
   width:100%;
-  opacity: 0;
-}*/
+}
 
 #dropbox .popup:hover {
-  background: url('../img/download.png') no-repeat center center rgba(255,255,255,0.5);
+  background: url('../img/popup.png') no-repeat center center rgba(255,255,255,0.5);
   opacity: 0.9;  
 }
 
@@ -179,24 +178,42 @@ header {
 
 #fancybox-title {
   line-height: 20px;
+  background: rgba(0,0,0,0.75);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px 0;
+  color: white;
+  text-align: center;
 }
+
+/*#fancybox-title::before {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  content: "";
+  display: block;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f1f1f1;
+}*/
 
 #fancybox-title input {
   width: 100%;
   text-align: center;
-  background: #F1F1F1;
   padding: 5px 0;
-  border: 1px solid #E2E2E2;
+  border: 0;
+  background: transparent;
   margin-top: 10px;
+  color: white;
 }
 
-#dropbox .popup{
+#dropbox .uploaded{
 	position: absolute;
 	top:0;
 	left:0;
 	height:100%;
 	width:100%;
-	background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
+	display: none;
+	background: url('../img/uploaded.png') no-repeat center center rgba(255,255,255,0.5);
 }
 
 #dropbox .preview.done .uploaded{
@@ -340,7 +357,7 @@ footer .left {
 }
 
 a {
-  color: #333;
+  color: #FFF;
   font-size: 12px;
   font-family: "Lucida Grande", "Helvetica Neue",Helvetica,Verdana,Arial,sans-serif;
   text-decoration: none;

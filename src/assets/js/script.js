@@ -14,6 +14,31 @@ $(function(){
 		uploadFinished:function(i,file,response){
 			$.data(file).addClass('done');
 			$.data(file).find('.progress').replaceWith("<input readonly onclick='this.focus();this.select()' value='http://share.soha.vn/i" + response.fid + ".png?width=800'>");
+			$.data(file).find('.uploaded').replaceWith('' + 
+			           '<a id="' + response.fid + '" class="popup" rel="popup" href="/p' + response.fid + '.png" target="_blank" title="' + response.fid + '"></a>' + 
+                   '<div id="' + response.fid + '" class="hidden">' + 
+                   + response.fid + '<br>' + 
+                   '  <span>Size (width): </span>' + 
+                   '  <a href="#">640px</a> | ' + 
+                   '  <a href="#" class="active">800px</a> | ' + 
+                   '  <a href="#">1024px</a> | ' + 
+                   '  <a href="#">Original</a><br>' + 
+                   '  <input readonly onclick="this.focus();this.select()" value="http://share.soha.vn/i' + response.fid + '.png?width=800"> ' + 
+                  ' </div>');
+                  
+      $("a[rel=popup]").fancybox({
+          'titleShow'     : true,
+          'titlePosition' : 'over',
+          'titleFormat'   : formatTitle,
+          'transitionIn'  : 'elastic',
+          'transitionOut' : 'elastic',
+          'easingIn'      : 'easeOutBack',
+          'easingOut'     : 'easeInBack',
+          'overlayColor'  : '#000',
+          'centerOnScroll': true,
+      });
+      
+      // $('a#' + response.fid).trigger('click');
 			// response is the JSON object that post_file.php returns
 		},
 		
@@ -57,7 +82,7 @@ $(function(){
 	var template = '<div class="preview">'+
 						'<span class="imageHolder">'+
 							'<img />'+
-							'<span class="popup"></span>'+
+							'<span class="uploaded"></span>'+
 						'</span>'+
 						'<div class="progressHolder">'+
 							'<div class="progress"></div>'+
@@ -107,7 +132,7 @@ $(function(){
 
   $("a[rel=popup]").fancybox({
         'titleShow'     : true,
-        'titlePosition' : 'inside',
+        'titlePosition' : 'over',
         'titleFormat'   : formatTitle,
         'transitionIn'  : 'elastic',
         'transitionOut' : 'elastic',

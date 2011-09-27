@@ -242,6 +242,7 @@
 
 					ajaxLoader = $.ajax($.extend({}, selectedOpts.ajax, {
 						url	: href,
+						cache   : false,
 						data : selectedOpts.ajax.data || {},
 						error : function(XMLHttpRequest, textStatus, errorThrown) {
 							if ( XMLHttpRequest.status > 0 ) {
@@ -792,7 +793,7 @@
 		$(this)
 			.data('fancybox', $.extend({}, options, ($.metadata ? $(this).metadata() : {})))
 			.unbind('click.fb')
-			.bind('click.fb', function(e) {
+			.live('click.fb', function(e) {
 				e.preventDefault();
 
 				if (busy) {
@@ -1095,7 +1096,7 @@
 	};
 
 	$.fn.fancybox.defaults = {
-		padding : 10,
+		padding : 0,
 		margin : 40,
 		opacity : false,
 		modal : false,
@@ -1116,8 +1117,8 @@
 		hideOnContentClick : false,
 
 		overlayShow : true,
-		overlayOpacity : 0.7,
-		overlayColor : '#777',
+		overlayOpacity : 0.5,
+		overlayColor : '#000',
 
 		titleShow : true,
 		titlePosition : 'float', // 'float', 'outside', 'inside' or 'over'
@@ -1141,11 +1142,17 @@
 		enableEscapeButton : true,
 		enableKeyboardNav : true,
 
-		onStart : function(){},
+		onStart : function(){           
+    		    $("#gallery").fadeTo(200, 0.05);
+    	            $("#bottom").fadeTo(300, 0.35);
+	        },
 		onCancel : function(){},
 		onComplete : function(){},
 		onCleanup : function(){},
-		onClosed : function(){},
+		onClosed : function(){
+		   $("#gallery").fadeTo(500, 1);
+	           $("#bottom").fadeTo(200, 1);
+	        },
 		onError : function(){}
 	};
 

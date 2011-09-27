@@ -61,9 +61,11 @@ def async(func):
 def make_thumb(fid, filedata):
   key = 'z' + fid
   key = str(key)
-  filedata = zoom(filedata, 200, 200)
-  CACHE.set(key, filedata)
-  return True
+  if not CACHE.get(key):
+    filedata = zoom(filedata, 200, 200)
+    CACHE.set(key, filedata)
+    return True
+  return False
   
 
 def new_id():
@@ -101,6 +103,8 @@ def save_file(uid, file):
     fp = DATASTORE.new_file(info['md5'])
     fp.write(filedata)
     fp.close()
+  else:
+    DATABASE.file.update({'md5': md5sum, 'uid': uid}, {'$set': {'ts': time()}})
     
   fid = info['_id']
   make_thumb(fid, filedata)
