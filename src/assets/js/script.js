@@ -208,34 +208,61 @@ $(function(){
       return result;
   }
   
-  function zoom(evt) {
-      var img = evt.currentTarget;
-	    // what's the size of this image and it's parent
-	    var w = $(img).width();
-	    var h = $(img).height();
-	    var tw = $(img).parent().width();
-	    var th = $(img).parent().height();
-
-	    alert(w);
-	    // compute the new size and offsets
-	    var result = ScaleImage(w, h, tw, th, false);
-
-	    // adjust the image coordinates and size
-	    img.width = result.width;
-	    img.height = result.height;
-	    $(img).css("left", result.targetleft);
-	    $(img).css("top", result.targettop);
-	    
-	    if (w > h) {
-		$(img).css('height', '200px');
-	    } else {
-		$(img).css('width', '200px');
-	    }
-	}
+  // Confirm dialog the Fancybox way
+  
+  function fancyConfirm(msg,callback) {
+      var ret;
+      jQuery.fancybox({
+          modal : true,
+          content : "<div class='confirm'>" 
+              	    + '<i class="alert"></i>'
+                    + msg 
+                    + '<div class="actions"><input class="fancyConfirm_cancel" type="button" value="Cancel">' 
+                    + '<input class="fancyConfirm_ok" type="button" value="Delete">' 
+                    + '</div></div>',
+          onComplete : function() {
+              jQuery(".fancyConfirm_cancel").click(function() {
+                  ret = false; 
+                  jQuery.fancybox.close();
+              })
+              jQuery(".fancyConfirm_ok").click(function() {
+                  ret = true; 
+                  jQuery.fancybox.close();
+              })
+          },
+          onClosed : function() {
+              //callback.call(this,ret);
+          },
+          'padding': 5,
+          'transitionIn'  : 'elastic',
+          'transitionOut' : 'elastic',
+          'easingIn'      : 'easeOutBack',
+          'easingOut'     : 'easeInBack',
+          'overlayColor'  : '#000',
+          'centerOnScroll': true,
+      });
+  }
+  
 
   // Load on ready
   $(document).ready(function() {
     $("html, body").animate({ scrollTop: $(document).height() }, 'slow');
+    
+    $('.preview').live('mouseover mouseout', function(e) {
+	if (e.type == 'mouseover') {
+		$('a.remove', this).show();
+	} else {
+	    	$('a.remove', this).hide();
+	}
+    });
+    
+    $('a.remove').live('click', function() {
+	var fid = $(this).attr('fid');
+	var filename = $(this).attr('filename');
+	//fancyConfirm('Remove this image?', null)
+	fancyConfirm('<h3>Are you sure you want to delete "' + filename + '"?<h3><p>This item will be deleted immediately. You can\'t undo this action.</p>');
+	return false;
+    });
   });
   
 });

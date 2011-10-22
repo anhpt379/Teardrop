@@ -17,6 +17,7 @@
             {% if files %}
               {% for file in files %}
               <div class='preview done'>
+                  <a href='#' class='remove' fid='{{ file._id }}' filename='{{ file.name }}'></a>
                 <span class='imageHolder'>
                   <img src='/z{{ file._id }}.png'>
 <!--                   <span class='uploaded'></span> -->
