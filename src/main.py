@@ -169,10 +169,10 @@ def thumbnail(fid):
 
 
 if __name__ == '__main__':
-#  app.run(debug=True, host='0.0.0.0', port=80)
-  from cherrypy import wsgiserver    
-  server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 80), app)
-  try:
-    server.start()
-  except KeyboardInterrupt:
-    server.stop()
+  app.run(debug=True, host='0.0.0.0', port=8080)
+#  from cherrypy import wsgiserver    
+#  server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 80), app)
+#  try:
+#    server.start()
+#  except KeyboardInterrupt:
+#    server.stop()

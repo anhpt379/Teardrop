@@ -10,7 +10,9 @@ $(function(){
 		maxfiles: 15,
     	maxfilesize: 10,
 		url: 'upload',
-		
+		drop: function() {	// scroll to bottom
+		    $("html, body").animate({ scrollTop: $(document).height() }, 'slow');  
+		},
 		uploadFinished:function(i,file,response){
 			$.data(file).addClass('done');
 			$.data(file).find('.progress').replaceWith("<input readonly onclick='this.focus();this.select()' value='http://share.soha.vn/i" + response.fid + ".png?width=800'>");
@@ -82,33 +84,50 @@ $(function(){
     	 
 	});
 	
-	var template = '<div class="preview">'+
-						'<span class="imageHolder">'+
-							'<img />'+
-							'<span class="uploaded"></span>'+
-						'</span>'+
-						'<div class="progressHolder">'+
-							'<div class="progress"></div>'+
-						'</div>'+
-					'</div>'; 
+
+    	var template = '<div class="preview">' 
+    	    + '<span class="imageHolder">'
+    	      + '<img />'
+	      + '<span class="uploaded"></span>'
+	    + '</span>'
+	    + '<div class="progressHolder">' 
+	      + '<div class="progress"></div>'
+	      + '</div>' 
+	  + '</div>'; 
 	
 	
 	function createImage(file){
 
 		var preview = $(template), 
-			image = $('img', preview);
+		    image = $('img', preview);
 			
 		var reader = new FileReader();
-		
-		image.width = 100;
-		image.height = 100;
-		
+				
 		reader.onload = function(e){
 			
 			// e.target.result holds the DataURL which
 			// can be used as a source of the image:
 			
-			image.attr('src',e.target.result);
+			image.attr('src',e.target.result)
+			     .one('load', function() { //fires (only once) when loaded
+				 var w = $(this).width();
+				 var h = $(this).height();
+				 var tw = $(this).parent().width();
+				 var th = $(this).parent().height();
+				 
+				 // compute the new size and offsets
+				 var result = ScaleImage(w, h, tw, th, false);
+
+				 // adjust the image coordinates and size
+				 $(this).css("left", result.targetleft);
+				 $(this).css("top", result.targettop);
+				    
+				 if (w > h) {
+					$(this).css('height', '200px');
+				 } else {
+					$(this).css('width', '200px');
+				 }
+			     });
 		};
 		
 		// Reading the file as a DataURL. When finished,
@@ -146,8 +165,75 @@ $(function(){
         'minWidth'      : 250,
       //  'showCloseButton': false
     });
+  
+  // Zoom and crop image (make thumbnail)
+  function ScaleImage(srcwidth, srcheight, targetwidth, targetheight, fLetterBox) {
 
+      var result = { width: 0, height: 0, fScaleToTargetWidth: true };
 
+      if ((srcwidth <= 0) || (srcheight <= 0) || (targetwidth <= 0) || (targetheight <= 0)) {
+          return result;
+      }
+
+      // scale to the target width
+      var scaleX1 = targetwidth;
+      var scaleY1 = (srcheight * targetwidth) / srcwidth;
+
+      // scale to the target height
+      var scaleX2 = (srcwidth * targetheight) / srcheight;
+      var scaleY2 = targetheight;
+
+      // now figure out which one we should use
+      var fScaleOnWidth = (scaleX2 > targetwidth);
+      if (fScaleOnWidth) {
+          fScaleOnWidth = fLetterBox;
+      }
+      else {
+         fScaleOnWidth = !fLetterBox;
+      }
+
+      if (fScaleOnWidth) {
+          result.width = Math.floor(scaleX1);
+          result.height = Math.floor(scaleY1);
+          result.fScaleToTargetWidth = true;
+      }
+      else {
+          result.width = Math.floor(scaleX2);
+          result.height = Math.floor(scaleY2);
+          result.fScaleToTargetWidth = false;
+      }
+      result.targetleft = Math.floor((targetwidth - result.width) / 2);
+      result.targettop = Math.floor((targetheight - result.height) / 2);
+
+      return result;
+  }
+  
+  function zoom(evt) {
+      var img = evt.currentTarget;
+	    // what's the size of this image and it's parent
+	    var w = $(img).width();
+	    var h = $(img).height();
+	    var tw = $(img).parent().width();
+	    var th = $(img).parent().height();
+
+	    alert(w);
+	    // compute the new size and offsets
+	    var result = ScaleImage(w, h, tw, th, false);
+
+	    // adjust the image coordinates and size
+	    img.width = result.width;
+	    img.height = result.height;
+	    $(img).css("left", result.targetleft);
+	    $(img).css("top", result.targettop);
+	    
+	    if (w > h) {
+		$(img).css('height', '200px');
+	    } else {
+		$(img).css('width', '200px');
+	    }
+	}
+
+  // Load on ready
   $(document).ready(function() {
     $("html, body").animate({ scrollTop: $(document).height() }, 'slow');
   });

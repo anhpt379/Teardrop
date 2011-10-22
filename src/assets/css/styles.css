@@ -92,7 +92,7 @@ html, body {
 	min-height: 100%;
   left: 0;
   top: 0;
-	padding-bottom: 100px;
+	padding-bottom: 150px;
 	box-shadow:0 0 4px rgba(0,0,0,0.3) inset,0 -3px 2px rgba(0,0,0,0.1);
 }
 
@@ -137,16 +137,26 @@ header {
 	text-align: center;
 }
 
+#dropbox .imageHolder {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
 #dropbox .preview img{
-	max-width: 240px;
-	max-height:180px;
-	border:3px solid #fff;
+/* 	max-width: 240px; */
+/* 	max-height:180px; */
 	display: block;
 	
 	box-shadow:0 0 2px #000;
+	
+	
+	position: absolute;
+	
 }
 
 #dropbox .imageHolder{
+  border:3px solid #fff;
 	display: inline-block;
 	position:relative;
 }
@@ -240,7 +250,7 @@ text-align: left;
 	height:12px;
 	width:100%;
 	left:0;
-	bottom: 0;
+	bottom: -25px;
 	
 	box-shadow:0 0 2px #000;
 }
