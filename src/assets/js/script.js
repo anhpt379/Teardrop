@@ -25,18 +25,21 @@ $(function(){
                    '  <a href="#">Original</a><br>' + 
                    '  <input readonly onclick="this.focus();this.select()" value="http://share.soha.vn/i' + response.fid + '.png?width=800"> ' + 
                   ' </div>');
-                  
+
+
       $("a[rel=popup]").fancybox({
-          'titleShow'     : true,
-          'titlePosition' : 'over',
-          'titleFormat'   : formatTitle,
-          'transitionIn'  : 'elastic',
-          'transitionOut' : 'elastic',
-          'easingIn'      : 'easeOutBack',
-          'easingOut'     : 'easeInBack',
-          'overlayColor'  : '#000',
-          'centerOnScroll': true,
-      });
+            'titleShow'     : true,
+            'titlePosition' : 'inside',
+            'titleFormat'   : formatTitle,
+            'transitionIn'  : 'elastic',
+            'transitionOut' : 'elastic',
+            'easingIn'      : 'easeOutBack',
+            'easingOut'     : 'easeInBack',
+            'overlayColor'  : '#000',
+            'centerOnScroll': true,
+            'minWidth'      : 250,
+     //       'showCloseButton': false
+        });
       
       // $('a#' + response.fid).trigger('click');
 			// response is the JSON object that post_file.php returns
@@ -132,7 +135,7 @@ $(function(){
 
   $("a[rel=popup]").fancybox({
         'titleShow'     : true,
-        'titlePosition' : 'over',
+        'titlePosition' : 'inside',
         'titleFormat'   : formatTitle,
         'transitionIn'  : 'elastic',
         'transitionOut' : 'elastic',
@@ -140,6 +143,8 @@ $(function(){
         'easingOut'     : 'easeInBack',
         'overlayColor'  : '#000',
         'centerOnScroll': true,
+        'minWidth'      : 250,
+      //  'showCloseButton': false
     });
 
 

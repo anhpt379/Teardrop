@@ -1,9 +1,9 @@
 #! coding: utf-8
 # pylint: disable-msg=W0311
 import os
+from time import time
 from uuid import uuid4
 from hashlib import md5
-from time import time
 from simplejson import dumps
 from mimemagic import from_buffer as mimetype
 from flask import Flask, request, send_from_directory, render_template, abort
@@ -46,18 +46,6 @@ def _get_next_id():
   return result['value'].get('auto_increment', 0)
 
 
-from threading import Thread
-from functools import wraps
-
-def async(func):
-  @wraps(func)
-  def async_func(*args, **kwargs):
-    func_hl = Thread(target = func, args = args, kwargs = kwargs)
-    func_hl.start()
-    return func_hl
-  return async_func
-
-@async
 def make_thumb(fid, filedata):
   key = 'z' + fid
   key = str(key)
@@ -112,6 +100,7 @@ def save_file(uid, file):
   return fid
   
   
+  
 @app.route("/assets/<path:filename>")
 def public_files(filename):
   src = os.path.dirname(__file__)
@@ -124,7 +113,7 @@ def home():
   app.logger.debug(files)
   response = app.make_response(render_template('index.html', files=files))
   if not uid:
-    response.set_cookie('uid', str(uuid4()), 365*24*60*60)
+    response.set_cookie('uid', str(uuid4()), 365*24*60*60)  # expires in 1 year
   return response
 
 @app.route("/upload", methods=["POST"])
@@ -145,7 +134,7 @@ def file(fid):
   response.headers['Content-Length'] = len(filedata)
   return response
 
-@app.route("/p<fid>.png")
+@app.route("/p<fid>.png") # p = preview
 def preview(fid):
   key = 'p' + fid
   key = str(key)
@@ -161,7 +150,7 @@ def preview(fid):
   response.headers['Content-Length'] = len(filedata)
   return response
 
-@app.route("/z<fid>.png")
+@app.route("/z<fid>.png") # z = zoom
 def thumbnail(fid):
   key = 'z' + fid
   key = str(key)
@@ -180,9 +169,9 @@ def thumbnail(fid):
 
 
 if __name__ == '__main__':
-#  app.run(debug=True, host='0.0.0.0')
+#  app.run(debug=True, host='0.0.0.0', port=80)
   from cherrypy import wsgiserver    
-  server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 5000), app)
+  server = wsgiserver.CherryPyWSGIServer(('0.0.0.0', 80), app)
   try:
     server.start()
   except KeyboardInterrupt:

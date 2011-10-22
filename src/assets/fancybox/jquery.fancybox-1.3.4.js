@@ -305,7 +305,15 @@
 		},
 
 		_process_image = function() {
-			selectedOpts.width = imgPreloader.width;
+      
+      // console.log(imgPreloader.width);
+      // console.log(currentOpts.minWidth);
+      // if (currentOpts.minWidth > 0 && currentOpts.minWidth > imgPreloader.width) {
+        // selectedOpts.width = currentOpts.minWidth;
+      // } else {
+        // selectedOpts.width  = imgPreloader.width;
+      // }
+      selectedOpts.width  = imgPreloader.width;
 			selectedOpts.height = imgPreloader.height;
 
 			$("<img />").attr({
@@ -1096,12 +1104,14 @@
 	};
 
 	$.fn.fancybox.defaults = {
-		padding : 0,
+		padding : 10,
 		margin : 40,
 		opacity : false,
 		modal : false,
 		cyclic : false,
 		scrolling : 'auto',	// 'auto', 'yes' or 'no'
+
+    minWidth    : 250,
 
 		width : 560,
 		height : 340,

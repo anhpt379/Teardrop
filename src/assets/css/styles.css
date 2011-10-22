@@ -178,15 +178,18 @@ header {
 
 #fancybox-title {
   line-height: 20px;
-  background: rgba(0,0,0,0.75);
+  background: rgba(0,0,0,0.9);
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
   padding: 10px 0;
   color: white;
+  margin-top: -10px;
+margin-bottom: 10px;
+text-align: left;
 }
 
 #fancybox-title label {
   font-weight: bold;
-  width: 150px;
+  width: 25%;
   text-align: right;
   display: inline-block;
 }
@@ -203,7 +206,7 @@ header {
 }*/
 
 #fancybox-title input {
-  min-width: 300px;
+  min-width: 50%;
   border: 0;
   background: transparent;
   color: white;
